@@ -1,0 +1,101 @@
+//Navbar
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+//Home
+.home {
+  margin-top: 60px;
+
+  &__title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+
+  &__container {
+    display: grid;
+    margin: 0 auto;
+    width: 70%;
+    grid-gap: 1rem;
+    justify-content: space-between;
+  }
+
+  @media (min-width: 768px) {
+    &__container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 998px) {
+    &__container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+//Cart
+.cart {
+  margin-top: 60px;
+
+  &__title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+
+  &__container {
+    margin: 0 auto;
+    width: 70%;
+
+    & > div {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__empty {
+    margin-top: 80px;
+    font-size: 2rem;
+    font-weight: 200;
+    text-align: center;
+  }
+}
+
+//Recipe
+.recipe {
+  margin: 0 auto;
+  width: 70%;
+}
+
+//Footer
+.footer {
+  min-height: 100px;
+  background: #4791db;
+  color: #fff;
+
+  &__container {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0px;
+  }
+
+  &__info {
+    width: 80%;
+  }
+
+  li {
+    list-style: none;
+    display: inline-block;
+    margin-left: 5px;
+  }
+}
+
+//Thanks
+.thank-you {
+  padding-top: 80px;
+  text-align: center;
+}
