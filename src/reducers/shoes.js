@@ -9,7 +9,8 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   ADD_QUANTITY,
-  SUB_QUANTITY
+  SUB_QUANTITY,
+  SELECT_ITEM
 } from "../actions/types";
 
 const initState = {
@@ -17,6 +18,7 @@ const initState = {
     {
       id: 1,
       title: "Winter body",
+      size: [40, 41, 42],
       desc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
       price: 110,
@@ -25,6 +27,8 @@ const initState = {
     {
       id: 2,
       title: "Adidas",
+      size: [40, 41, 42, 43],
+
       desc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
       price: 80,
@@ -33,6 +37,8 @@ const initState = {
     {
       id: 3,
       title: "Vans",
+      size: [39, 40, 41, 42],
+
       desc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
       price: 120,
@@ -41,6 +47,8 @@ const initState = {
     {
       id: 4,
       title: "White",
+      size: [38, 39, 40, 41],
+
       desc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
       price: 260,
@@ -49,6 +57,8 @@ const initState = {
     {
       id: 5,
       title: "Cropped-sho",
+      size: [40, 41, 42, 43, 44],
+
       desc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
       price: 160,
@@ -57,35 +67,28 @@ const initState = {
     {
       id: 6,
       title: "Blues",
+      size: [41, 42, 43],
       desc:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
       price: 90,
       img: Item6
     }
   ],
-  addedItems: [
-    // {
-    //   id: 6,
-    //   title: "Blues",
-    //   desc:
-    //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
-    //   price: 90,
-    //   img: Item6
-    // },
-    // {
-    //   id: 5,
-    //   title: "Cropped-sho",
-    //   desc:
-    //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
-    //   price: 160,
-    //   img: Item5
-    // }
-  ],
+  selectedItem: {},
+  addedItems: [],
+  quantity: 0,
   total: 0
 };
 
 const shoesReducer = (state = initState, action) => {
   switch (action.type) {
+    case SELECT_ITEM:
+      let selectedItem = state.items.find(item => item.id === action.id);
+      return {
+        ...state,
+        selectedItem: { ...selectedItem }
+      };
+
     case ADD_TO_CART:
       let addedItem = state.items.find(item => item.id === action.id);
       let existedItem = state.addedItems.find(item => item.id === action.id);
@@ -95,6 +98,7 @@ const shoesReducer = (state = initState, action) => {
 
         return {
           ...state,
+          quantity: state.quantity + 1,
           total: state.total + addedItem.price
         };
       } else {
@@ -103,6 +107,7 @@ const shoesReducer = (state = initState, action) => {
         return {
           ...state,
           addedItems: [...state.addedItems, addedItem],
+          quantity: state.quantity + 1,
           total: state.total + addedItem.price
         };
       }
@@ -115,6 +120,7 @@ const shoesReducer = (state = initState, action) => {
       return {
         ...state,
         addedItems: newItems,
+        quantity: state.quantity - itemToRemove.quantity,
         total: newTotal
       };
 
@@ -125,6 +131,7 @@ const shoesReducer = (state = initState, action) => {
       return {
         ...state,
         addedItems: [...state.addedItems],
+        quantity: state.quantity + 1,
         total: state.total + itemToAdd.price
       };
 
@@ -138,6 +145,7 @@ const shoesReducer = (state = initState, action) => {
         return {
           ...state,
           addedItems: newItems,
+          quantity: state.quantity - 1,
           total: state.total - itemToSub.price
         };
       } else {
@@ -145,6 +153,7 @@ const shoesReducer = (state = initState, action) => {
         return {
           ...state,
           addedItems: [...state.addedItems],
+          quantity: state.quantity - 1,
           total: state.total - itemToSub.price
         };
       }

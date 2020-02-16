@@ -403,3 +403,8 @@
 .slide-fade-up-exit-done {
   opacity: 0;
 }
+.card-helper {
+  color: red;
+  font-style: italic;
+  font-size: 15px;
+}

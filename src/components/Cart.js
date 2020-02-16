@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -11,7 +12,6 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Button from "@material-ui/core/Button";
 
 import { removeFromCart, addQuantity, subQuantity } from "../actions/cart";
-import Recipe from "./Recipe";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,12 +25,14 @@ const useStyles = makeStyles(theme => ({
     flex: "1 0 auto"
   },
   cover: {
-    width: 200
+    width: 300
   }
 }));
 
 const Cart = props => {
   const classes = useStyles();
+
+  const { addedItems } = props.shoes;
 
   const handleAddQuantity = id => {
     props.addQuantity(id);
@@ -44,8 +46,14 @@ const Cart = props => {
     props.removeFromCart(id);
   };
 
-  if (props.addedShoes.length) {
-    var addedItems = props.addedShoes.map(item => {
+  const onCheckout = () => {
+    props.history.push("/checkout");
+  };
+
+  if (addedItems.length) {
+    var addedShoes = addedItems.map(item => {
+      item.selectedSize = props.size;
+
       return (
         <Card className={classes.root} variant="outlined">
           <CardMedia
@@ -58,10 +66,9 @@ const Cart = props => {
               <Typography component="h5" variant="h5">
                 {item.title}
               </Typography>
-              <Typography component="h5" variant="subtitle2">
-                {item.price}$
-              </Typography>
-
+              <Typography variant="subtitle">{item.price}$</Typography>
+              <br />
+              <br />
               <Typography variant="subtitle1" color="textSecondary">
                 <Button onClick={() => handleSubQuantity(item.id)}>
                   <RemoveCircleIcon color="secondary"></RemoveCircleIcon>
@@ -71,6 +78,7 @@ const Cart = props => {
                   <AddCircleIcon color="secondary"></AddCircleIcon>
                 </Button>
               </Typography>
+              <Typography variant="subtitle2">Size: {props.size}</Typography>
             </CardContent>
             <CardContent className={classes.content}>
               <Button
@@ -86,20 +94,35 @@ const Cart = props => {
       );
     });
   } else {
-    var addedItems = <div className="cart__empty">Cart is empty.</div>;
+    var addedShoes = <div className="cart__empty">Cart is empty.</div>;
   }
 
   return (
     <div className="cart">
       <div className="cart__title">Your cart</div>
-      <div className="cart__container">{addedItems}</div>
-      <Recipe></Recipe>;
+      <div className="cart__container">
+        <div className="cart__items">{addedShoes}</div>
+        {addedShoes.length && (
+          <div className="cart__summary">
+            <Typography variant="h4">Total: {props.shoes.total}$</Typography>
+            <br />
+            <Button
+              color="secondary"
+              variant="contained"
+              className={classes.button}
+              onClick={onCheckout}
+            >
+              Checkout!
+            </Button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  addedShoes: state.shoes.addedItems
+  shoes: state.shoes
 });
 
 export default connect(mapStateToProps, {

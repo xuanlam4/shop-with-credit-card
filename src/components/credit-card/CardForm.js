@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Card from "./Card";
+import validataCard from "../../validation/validateCard";
 import "./style.scss";
+import validateCard from "../../validation/validateCard";
 
 class CardForm extends Component {
   constructor(props) {
@@ -12,6 +14,7 @@ class CardForm extends Component {
       cardMonth: "",
       cardYear: "",
       cardCvv: "",
+      errors: {},
       currentFocusElm: "",
       isCardFlipped: false,
       cardNumberMaxLength: "",
@@ -90,6 +93,15 @@ class CardForm extends Component {
     });
   };
 
+  onSubmit = () => {
+    const validation = validateCard(this.state);
+    if (validation.isValid) {
+      this.props.history.push("thank-you");
+    } else {
+      this.setState({ ...this.state, errors: { ...validation.errors } });
+    }
+  };
+
   render() {
     let {
       cardNumber,
@@ -142,6 +154,7 @@ class CardForm extends Component {
                 onChange={this.handleNumberChange}
                 autoComplete="off"
               />
+              <p className="card-helper">{this.state.errors.cardNumber}</p>
             </div>
             <div className="card-input">
               <label htmlFor="cardName" className="card-input__label">
@@ -160,6 +173,7 @@ class CardForm extends Component {
                 onChange={this.handleFormChange}
                 autoComplete="off"
               />
+              <p className="card-helper">{this.state.errors.cardName}</p>
             </div>
             <div className="card-form__row">
               <div className="card-form__col">
@@ -184,6 +198,7 @@ class CardForm extends Component {
                       <option>{month}</option>
                     ))}
                   </select>
+
                   <select
                     name="cardYear"
                     className="card-input__input -select"
@@ -201,6 +216,7 @@ class CardForm extends Component {
                     ))}
                   </select>
                 </div>
+                <p className="card-helper">{this.state.errors.cardDate}</p>
               </div>
               <div className="card-form__col -cvv">
                 <div className="card-input">
@@ -218,13 +234,13 @@ class CardForm extends Component {
                     onChange={this.handleFormChange}
                   />
                 </div>
+                <p className="card-helper">{this.state.errors.cardCvv}</p>
               </div>
             </div>
-            <Link to="thank-you">
-              <button className="card-form__button" onClick={this.handleSubmit}>
-                Submit
-              </button>
-            </Link>
+
+            <button className="card-form__button" onClick={this.onSubmit}>
+              Submit
+            </button>
           </div>
         </div>
       </div>
