@@ -10,7 +10,8 @@ import {
   REMOVE_FROM_CART,
   ADD_QUANTITY,
   SUB_QUANTITY,
-  SELECT_ITEM
+  SELECT_ITEM,
+  CLEAR_CART
 } from "../actions/types";
 
 const initState = {
@@ -75,18 +76,7 @@ const initState = {
     }
   ],
   selectedItem: {},
-  addedItems: [
-    {
-      id: 3,
-      title: "Vans",
-      size: [39, 40, 41, 42],
-
-      desc:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
-      price: 120,
-      img: Item3
-    }
-  ],
+  addedItems: [],
   quantity: 0,
   total: 0
 };
@@ -168,6 +158,13 @@ const shoesReducer = (state = initState, action) => {
           total: state.total - itemToSub.price
         };
       }
+    case CLEAR_CART:
+      return {
+        ...state,
+        addedItems: [],
+        quantity: 0,
+        total: 0
+      };
 
     default:
       return state;

@@ -15,12 +15,12 @@ const Footer = () => {
         </div>
         <div className="footer__contact">
           <Typography variant="subtitle2">Follow:</Typography>
-          <li>
+          <a href="https://facebook.com">
             <FacebookIcon></FacebookIcon>
-          </li>
-          <li>
+          </a>
+          <a href="https://instagram.com">
             <InstagramIcon></InstagramIcon>
-          </li>
+          </a>
         </div>
       </div>
     </div>

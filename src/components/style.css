@@ -81,7 +81,7 @@ a {
 .footer__info {
   width: 80%;
 }
-.footer li {
+.footer a {
   list-style: none;
   display: inline-block;
   margin-left: 5px;

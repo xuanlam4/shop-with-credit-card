@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+
 import Card from "./Card";
-import validataCard from "../../validation/validateCard";
-import "./style.scss";
 import validateCard from "../../validation/validateCard";
+import { clearCart } from "../../actions/cart";
+import "./style.scss";
 
 class CardForm extends Component {
   constructor(props) {
@@ -96,6 +97,7 @@ class CardForm extends Component {
   onSubmit = () => {
     const validation = validateCard(this.state);
     if (validation.isValid) {
+      this.props.clearCart();
       this.props.history.push("thank-you");
     } else {
       this.setState({ ...this.state, errors: { ...validation.errors } });
@@ -248,4 +250,4 @@ class CardForm extends Component {
   }
 }
 
-export default CardForm;
+export default connect(null, { clearCart })(CardForm);

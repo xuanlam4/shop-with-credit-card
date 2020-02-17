@@ -10,7 +10,12 @@ import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Button from "@material-ui/core/Button";
 
-import { removeFromCart, addQuantity, subQuantity } from "../actions/cart";
+import {
+  removeFromCart,
+  addQuantity,
+  subQuantity,
+  clearCart
+} from "../actions/cart";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -47,6 +52,10 @@ const Cart = props => {
 
   const onCheckout = () => {
     props.history.push("/checkout");
+  };
+
+  const onClearCart = () => {
+    props.clearCart();
   };
 
   if (addedItems.length) {
@@ -116,6 +125,14 @@ const Cart = props => {
             >
               Checkout!
             </Button>
+            <Button
+              color="secondary"
+              variant="contained"
+              className={classes.button}
+              onClick={onClearCart}
+            >
+              Clear cart
+            </Button>
           </div>
         )}
       </div>
@@ -130,5 +147,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   removeFromCart,
   addQuantity,
-  subQuantity
+  subQuantity,
+  clearCart
 })(Cart);

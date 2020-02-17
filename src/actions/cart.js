@@ -2,7 +2,8 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   ADD_QUANTITY,
-  SUB_QUANTITY
+  SUB_QUANTITY,
+  CLEAR_CART
 } from "./types";
 
 export const addToCart = id => {
@@ -30,5 +31,11 @@ export const subQuantity = id => {
   return {
     type: SUB_QUANTITY,
     id
+  };
+};
+
+export const clearCart = () => {
+  return {
+    type: CLEAR_CART
   };
 };

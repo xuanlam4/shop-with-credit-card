@@ -18,6 +18,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from "@material-ui/core/FormLabel";
 
 import validateShipping from "../validation/validateShipping";
+import { clearCart } from "../actions/cart";
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -63,7 +64,10 @@ const theme = createMuiTheme({
 const Checkout = props => {
   const classes = useStyles();
 
-  const [inputs, setInputs] = React.useState({});
+  const [inputs, setInputs] = React.useState({
+    shippingMethod: "regular",
+    paymentMethod: "credit-card"
+  });
   const [errors, setErrors] = React.useState({});
 
   const onChange = event => {
@@ -80,6 +84,7 @@ const Checkout = props => {
       if (inputs.paymentMethod === "credit-card") {
         props.history.push("/credit-card");
       } else {
+        props.clearCart();
         props.history.push("/thank-you");
       }
     } else {
@@ -166,7 +171,6 @@ const Checkout = props => {
                 value="regular"
                 control={<Radio />}
                 label="Regular"
-                checked
               />
               <FormControlLabel
                 value="express"
@@ -185,7 +189,6 @@ const Checkout = props => {
                 value="credit-card"
                 control={<Radio />}
                 label="Credit card (Recommended)"
-                checked
               />
               <FormControlLabel value="cod" control={<Radio />} label="COD" />
             </RadioGroup>
@@ -261,4 +264,4 @@ const mapStateToProps = state => ({
   shoes: state.shoes
 });
 
-export default connect(mapStateToProps, null)(Checkout);
+export default connect(mapStateToProps, { clearCart })(Checkout);
