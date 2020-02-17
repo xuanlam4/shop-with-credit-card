@@ -30,6 +30,10 @@ const useStyles = makeStyles(theme => ({
   },
   cover: {
     width: 300
+  },
+  button: {
+    width: 200,
+    marginBottom: 30
   }
 }));
 
@@ -125,6 +129,7 @@ const Cart = props => {
             >
               Checkout!
             </Button>
+            <br />
             <Button
               color="secondary"
               variant="contained"
