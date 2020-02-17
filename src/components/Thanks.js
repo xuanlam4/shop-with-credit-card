@@ -1,10 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 
 const Thanks = () => {
   return (
     <div className="thank-you">
-      <Typography variant="h4">Thanks you for your purchases!</Typography>
+      <Typography variant="h4">Thank you for your purchases!</Typography>
+      <Typography variant="h5">
+        You can click the logo to continue shopping!
+      </Typography>
     </div>
   );
 };

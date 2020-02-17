@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -69,16 +68,19 @@ const Cart = props => {
               <Typography variant="subtitle">{item.price}$</Typography>
               <br />
               <br />
-              <Typography variant="subtitle1" color="textSecondary">
-                <Button onClick={() => handleSubQuantity(item.id)}>
-                  <RemoveCircleIcon color="secondary"></RemoveCircleIcon>
-                </Button>
-                Quantity: {item.quantity}
-                <Button onClick={() => handleAddQuantity(item.id)}>
-                  <AddCircleIcon color="secondary"></AddCircleIcon>
-                </Button>
-              </Typography>
               <Typography variant="subtitle2">Size: {props.size}</Typography>
+
+              <Typography variant="subtitle1" color="textSecondary">
+                Quantity: {item.quantity}
+              </Typography>
+              <RemoveCircleIcon
+                color="secondary"
+                onClick={() => handleSubQuantity(item.id)}
+              ></RemoveCircleIcon>
+              <AddCircleIcon
+                color="secondary"
+                onClick={() => handleAddQuantity(item.id)}
+              ></AddCircleIcon>
             </CardContent>
             <CardContent className={classes.content}>
               <Button

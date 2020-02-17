@@ -8,20 +8,20 @@ const Footer = () => {
     <div className="footer">
       <div className="footer__container">
         <div className="footer__info">
-          <Typography variant="h5">ShoeShop</Typography>
+          <Typography variant="h6">ShoeShop</Typography>
           <Typography variant="subtitle1">
             Address: 1 Hai Ba Trung, Dist.1, HCMC
           </Typography>
         </div>
-        <ul className="footer__contact">
-          <Typography variant="subtitle1">Follow us:</Typography>
+        <div className="footer__contact">
+          <Typography variant="subtitle2">Follow:</Typography>
           <li>
             <FacebookIcon></FacebookIcon>
           </li>
           <li>
             <InstagramIcon></InstagramIcon>
           </li>
-        </ul>
+        </div>
       </div>
     </div>
   );

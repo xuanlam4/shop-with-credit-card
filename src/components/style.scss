@@ -11,7 +11,8 @@ a {
   &__title {
     text-align: center;
     font-size: 3rem;
-    font-weight: 300;
+    font-weight: 700;
+    font-style: italic;
     margin-bottom: 20px;
   }
 
@@ -50,7 +51,8 @@ a {
   &__title {
     text-align: center;
     font-size: 3rem;
-    font-weight: 300;
+    font-weight: 700;
+    font-style: italic;
     margin-bottom: 20px;
   }
 
@@ -61,6 +63,10 @@ a {
     & > div {
       margin-bottom: 50px;
     }
+  }
+
+  &__summary {
+    text-align: right;
   }
 
   &__empty {
@@ -106,6 +112,8 @@ a {
 .thank-you {
   padding-top: 80px;
   text-align: center;
+  color: #000;
+  font-style: italic;
 }
 
 //Detail

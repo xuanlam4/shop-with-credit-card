@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
     "&:hover": {
       backgroundColor: fade(theme.palette.common.white, 0.25)
     },
-    marginLeft: 0,
+    marginLeft: 20,
     width: "100%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
@@ -86,7 +86,7 @@ const Navbar = props => {
         <AppBar position="static" color="secondary">
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
-              ShoeShop
+              <Link to="/">ShoeShop</Link>
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
@@ -102,12 +102,6 @@ const Navbar = props => {
                 onChange={handleSearch}
               />
             </div>
-            <Link to="/">
-              <Button color="inherit">Shop</Button>
-            </Link>
-            <Link to="/cart">
-              <Button color="inherit">Cart</Button>
-            </Link>
             <Link to="/cart">
               <Button color="inherit">
                 <Badge badgeContent={props.shoes.quantity} color="error">

@@ -8,7 +8,8 @@ a {
 .home__title {
   text-align: center;
   font-size: 3rem;
-  font-weight: 300;
+  font-weight: 700;
+  font-style: italic;
   margin-bottom: 20px;
 }
 .home__filters {
@@ -41,7 +42,8 @@ a {
 .cart__title {
   text-align: center;
   font-size: 3rem;
-  font-weight: 300;
+  font-weight: 700;
+  font-style: italic;
   margin-bottom: 20px;
 }
 .cart__container {
@@ -50,6 +52,9 @@ a {
 }
 .cart__container > div {
   margin-bottom: 50px;
+}
+.cart__summary {
+  text-align: right;
 }
 .cart__empty {
   margin-top: 80px;
@@ -84,6 +89,8 @@ a {
 .thank-you {
   padding-top: 80px;
   text-align: center;
+  color: #000;
+  font-style: italic;
 }
 .detail__container {
   width: 70%;
