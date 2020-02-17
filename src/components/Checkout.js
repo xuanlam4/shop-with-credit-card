@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -37,6 +36,13 @@ const useStyles = makeStyles(theme => ({
   },
   cover: {
     width: 200
+  },
+  summary: {
+    "& > *": {
+      display: "flex",
+      justifyContent: "space-between",
+      marginBottom: 10
+    }
   }
 }));
 
@@ -55,16 +61,19 @@ const Checkout = props => {
   };
 
   const onSubmit = e => {
-    e.preventDefault();
     const validation = validateShipping(inputs);
     if (validation.isValid) {
-      props.history.push("/credit-card");
+      if (inputs.paymentMethod === "credit-card") {
+        props.history.push("/credit-card");
+      } else {
+        props.history.push("/thank-you");
+      }
     } else {
       setErrors(validation.errors);
     }
   };
 
-  const { addedItems } = props.shoes;
+  const { addedItems, total } = props.shoes;
 
   return (
     <div className="checkout__container">
@@ -131,13 +140,30 @@ const Checkout = props => {
             onChange={onChange}
             helperText={errors.phonenumber}
           />
-          <br />
-          <br />
-          <FormLabel component="legend">Payment method</FormLabel>
+          <FormLabel component="legend">Shipping method</FormLabel>
           <RadioGroup
             aria-label="Shipping method"
             name="shippingMethod"
             value={inputs.shippingMethod}
+            onChange={onChange}
+          >
+            <FormControlLabel
+              value="regular"
+              control={<Radio />}
+              label="Regular"
+              defaultChecked
+            />
+            <FormControlLabel
+              value="express"
+              control={<Radio />}
+              label="Express (+5$)"
+            />
+          </RadioGroup>
+          <FormLabel component="legend">Payment method</FormLabel>
+          <RadioGroup
+            aria-label="Payment method"
+            name="paymentMethod"
+            value={inputs.paymentMethod}
             onChange={onChange}
           >
             <FormControlLabel
@@ -148,44 +174,69 @@ const Checkout = props => {
             />
             <FormControlLabel value="cod" control={<Radio />} label="COD" />
           </RadioGroup>
-          <Button
-            color="secondary"
-            variant="contained"
-            onClick={onSubmit}
-            fullWidth
-          >
-            NEXT
-          </Button>
         </form>
       </div>
 
-      <div className="checkout__cart">
-        <Typography variant="h5">Your cart</Typography>
-        <br />
-        {addedItems.map(item => (
-          <Card className={classes.root} variant="outlined">
-            <CardMedia
-              className={classes.cover}
-              image={item.img}
-              title={item.title}
-            />
-            <div className={classes.details}>
-              <CardContent className={classes.content}>
-                <Typography component="h5" variant="h5">
-                  {item.title}
-                </Typography>
-                <Typography variant="subtitle">{item.price}$</Typography>
-
+      <div className="checkout__info">
+        <div className="checkout__cart">
+          <Typography variant="h5">Your cart</Typography>
+          <br />
+          {addedItems.map(item => (
+            <Card className={classes.root} variant="outlined">
+              <CardMedia
+                className={classes.cover}
+                image={item.img}
+                title={item.title}
+              />
+              <div className={classes.details}>
+                <CardContent className={classes.content}>
+                  <Typography component="h5" variant="h5">
+                    {item.title}
+                  </Typography>
+                  <Typography variant="subtitle">{item.price}$</Typography>
+                  <Typography variant="subtitle2">
+                    Size: {item.selectedSize}
+                  </Typography>
+                  <Typography variant="subtitle2">
+                    Qty: {item.quantity}
+                  </Typography>
+                </CardContent>
+              </div>
+            </Card>
+          ))}
+        </div>
+        <div className="checkout__summary">
+          <Typography variant="h5">Summary</Typography>
+          <br />
+          <Card>
+            <CardContent className={classes.summary}>
+              <div>
+                <Typography variant="h5">Sub-total</Typography>
+                <Typography variant="h5">{total}</Typography>
+              </div>
+              <div>
+                <Typography variant="subtitle2">Shipping</Typography>
                 <Typography variant="subtitle2">
-                  Size: {item.selectedSize}
+                  {inputs.shippingMethod === "express" ? 5 : 0}$
                 </Typography>
-                <Typography variant="subtitle2">
-                  Qty: {item.quantity}
+              </div>
+              <div>
+                <Typography variant="h5">Total</Typography>
+                <Typography variant="h5">
+                  {inputs.shippingMethod === "express" ? total + 5 : total}$
                 </Typography>
-              </CardContent>
-            </div>
+              </div>
+            </CardContent>
           </Card>
-        ))}
+        </div>
+        <Button
+          color="secondary"
+          variant="contained"
+          onClick={onSubmit}
+          fullWidth
+        >
+          NEXT
+        </Button>
       </div>
     </div>
   );

@@ -190,8 +190,15 @@ a {
   }
 
   &__form,
-  &__cart {
+  &__info {
     max-width: 50%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__cart,
+  &__summary {
+    margin-bottom: 50px;
   }
 
   @media (max-width: 998px) {
@@ -200,7 +207,7 @@ a {
     }
 
     &__form,
-    &__cart {
+    &__info {
       max-width: 100%;
     }
   }

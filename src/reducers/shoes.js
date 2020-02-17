@@ -75,7 +75,18 @@ const initState = {
     }
   ],
   selectedItem: {},
-  addedItems: [],
+  addedItems: [
+    {
+      id: 3,
+      title: "Vans",
+      size: [39, 40, 41, 42],
+
+      desc:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
+      price: 120,
+      img: Item3
+    }
+  ],
   quantity: 0,
   total: 0
 };
