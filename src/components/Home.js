@@ -26,7 +26,6 @@ const useStyles = makeStyles(theme => ({
     height: 200
   },
   formControl: {
-    // margin: theme.spacing(1),
     minWidth: 140
   },
   selectEmpty: {
@@ -58,7 +57,9 @@ const Home = props => {
   };
 
   const filteredItems = props.shoes.items.filter(item => {
-    return item.title.toLowerCase().indexOf(props.searchValue) !== -1;
+    return (
+      item.title.toLowerCase().indexOf(props.searchValue.toLowerCase()) !== -1
+    );
   });
 
   const classes = useStyles();
