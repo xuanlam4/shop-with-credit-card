@@ -54,7 +54,7 @@ const useStyles = makeStyles(theme => ({
 const theme = createMuiTheme({
   typography: {
     h5: {
-      fontWeight: 900,
+      fontWeight: 700,
       fontStyle: "italic",
       textTransform: "uppercase"
     }
