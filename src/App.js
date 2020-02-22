@@ -8,6 +8,7 @@ import Cart from "./components/Cart";
 import Thanks from "./components/Thanks";
 import Footer from "./components/Footer";
 import Detail from "./components/Detail";
+import NotFound from "./components/NotFound";
 import Checkout from "./components/Checkout";
 import CardForm from "./components/credit-card/CardForm";
 
@@ -48,6 +49,7 @@ const App = () => {
               ></Route>
               <Route path="/checkout" component={Checkout}></Route>
               <Route path="/thank-you" component={Thanks}></Route>
+              <Route component={NotFound}></Route>
             </Switch>
           </div>
           <Footer></Footer>
